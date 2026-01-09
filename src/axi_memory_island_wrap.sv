@@ -51,7 +51,8 @@ module axi_memory_island_wrap #(
   parameter int unsigned NarrowExtraBF        = 1,
   /// Words per memory bank. (Total number of banks is (WideWidth/NarrowWidth)*NumWideBanks)
   parameter int unsigned WordsPerBank         = 1024,
-  parameter              MemorySimInit        = "none"
+  parameter              MemorySimInit        = "none",
+  parameter bit          DisableWideBankInterleaving = 1'b1
 ) (
   input  logic                               clk_i,
   input  logic                               rst_ni,
@@ -168,7 +169,8 @@ module axi_memory_island_wrap #(
     .SpillReqBank         ( SpillReqBank         ),
     .SpillRspBank         ( SpillRspBank         ),
     .WidePriorityWait     ( WidePriorityWait     ),
-    .MemorySimInit        ( MemorySimInit        )
+    .MemorySimInit        ( MemorySimInit        ),
+    .DisableWideBankInterleaving (DisableWideBankInterleaving)
   ) i_memory_island (
     .clk_i,
     .rst_ni,
